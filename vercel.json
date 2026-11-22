@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/:token([A-Za-z0-9_-]{43})",
+      "destination": "/api/signups?token=:token"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
