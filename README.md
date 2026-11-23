@@ -9,7 +9,8 @@ Static site for Onit, hosted at **uronit.com**.
 | `og.png` | Image shown when the link is shared. |
 | `api/waitlist.js` | Saves waitlist emails. |
 | `api/signups.js` | Shows the saved addresses on an unlisted page. |
-| `vercel.json` | Response headers and the unlisted-page route. |
+| `api/stats.js` | Shows visitor counts on a separate unlisted page. |
+| `vercel.json` | Response headers and the unlisted-page routes. |
 
 The page loads Bricolage Grotesque and Plus Jakarta Sans from Google Fonts.
 
@@ -21,11 +22,19 @@ Signing up again with the same address is treated as success. A hidden company f
 
 The signup list is a separate page. Its address is `https://uronit.com/` followed by the value of `SIGNUP_VIEW_SECRET`. That value is only stored as a Vercel environment variable. A wrong address returns "Not found". The page is not linked from the public site.
 
+## Visitors
+
+Visitor counts are a separate page. Its address is `https://uronit.com/` followed by the value of `STATS_VIEW_SECRET`. That value is only stored as a Vercel environment variable, and it looks like `stats` plus ten digits. A wrong address returns "Not found". The page is not linked from the public site.
+
+The page reads Vercel Web Analytics with `ANALYTICS_READ_TOKEN`. Until that token is set, the page says how to add it.
+
 Required environment variables, production and preview:
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `SIGNUP_VIEW_SECRET`
+- `STATS_VIEW_SECRET`
+- `ANALYTICS_READ_TOKEN`
 
 ## Preview locally
 
@@ -33,7 +42,7 @@ Required environment variables, production and preview:
 python3 -m http.server 8000
 ```
 
-The page loads at http://localhost:8000. The waitlist call needs the deployed API, or `vercel dev` with the two environment variables set.
+The page loads at http://localhost:8000. The waitlist and the unlisted pages need the deployed API, or `vercel dev` with the environment variables set.
 
 ## Deploy
 
