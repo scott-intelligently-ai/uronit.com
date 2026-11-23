@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/:token(stats[0-9]{10})",
+      "destination": "/api/stats?token=:token"
+    },
+    {
       "source": "/:token([A-Za-z0-9_-]{43})",
       "destination": "/api/signups?token=:token"
     }
